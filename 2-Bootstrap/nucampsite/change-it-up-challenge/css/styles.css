@@ -15,13 +15,13 @@ header h2 {
 }
 
 .site-footer {
-    background-image: linear-gradient(#CEC8FF, white);
+    background-image: linear-gradient(AliceBlue, CornflowerBlue);
     padding: 20px 0;
 }
 
 .jumbotron {
     padding: 30px;
-    background-image: linear-gradient(to right, #5637DD, #3046C5, #60106B);
+    background-image: linear-gradient(to right, #5637DD, Yellow, CornflowerBlue);
     color: white;
     margin: 0;
 }
@@ -32,7 +32,7 @@ header h2 {
     min-height: 200px;
 }
 .navbar {
-    background-color: #901CAD;
+    background-image: linear-gradient(to right, CornflowerBlue, #5637DD);
 }
 
 .tab-content {
@@ -50,4 +50,18 @@ header h2 {
 .carousel {
     border: solid #5637DD;
     border-radius: 0.5rem;
+}
+
+.tab-title-top {
+    position: relative;
+    text-align: center;
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    padding: 2px;
+    margin: 2px;
+    border-radius: 0.5rem;
+}
+
+.card-body {
+    background-image: linear-gradient(to right, AliceBlue, CornflowerBlue);
 }

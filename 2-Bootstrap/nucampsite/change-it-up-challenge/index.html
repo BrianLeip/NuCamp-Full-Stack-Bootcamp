@@ -11,7 +11,7 @@
     
     <!-- Additional CSS must be placed after Bootstrap CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster|Open+Sans" />
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/node_modules/bootstrap-social/bootstrap-social.css" />
 
@@ -42,7 +42,7 @@
 
     <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="change-it-up-challenge/index.html"><img src="/img/logo.png" height="30" width="30" /></a>
+            <a class="navbar-brand" href="../index.html"><img src="/img/logo.png" height="30" width="30" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nucampNavbar">
             <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#nucampNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -144,45 +144,37 @@
         </div>
 
         <div class="row row-content align-items-center">
-            <div class="col-sm-4 order-sm-last col-md-3">
-                <h2 class="text-sm-right">Discover & Review</h2>
-            </div>
             <div class="col">
-                <div class="media">
-                    <img class="d-flex mr-3 img-thumbnail" src="/img/breadcrumb-trail-thumb.jpg" alt="Breadcrumb Trail" />
-                    <div class="media-body align-self-center">
-                        <h3>Our Campsites</h3>
-                        <p class="d-none d-sm-block">Explore our growing database of curated campsites and leave your own reviews!</p>
+                <ol class="nav nav-pills nav-fill">
+                    <li class="nav-item">
+                        <a id="discover-tab" class="nav-link active" href="#discover" data-toggle="tab" role="tab">
+                            <div class="tab-title-top">Discover & Review</div>
+                            <img class="img-thumbnail" src="/img/breadcrumb-trail-thumb.jpg" />
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="campsites-tab" class="nav-link" href="#campsites" data-toggle="tab" role="tab">
+                            <div class="tab-title-top">Featured Campsites</div>
+                            <img class="img-thumbnail" src="/img/react-lake-thumb.jpg" />
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="community-tab" class="nav-link" href="#community" data-toggle="tab" role="tab">
+                            <div class="tab-title-top">Community Partners</div>
+                            <img class="img-thumbnail" src="/img/bootstrap-thumb.png" />
+                        </a>
+                    </li>
+                </ol>
+                <div id="tabContent" class="tab-content">
+                    <div id="discover" class="tab-pane fade show active" role="tabpanel">
+                        <p>Explore our growing database of curated campsites and leave your own reviews!</p>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row row-content align-items-center">
-            <div class="col-sm-4 col-md-3">
-                <h2>Featured Campsites</h2>
-            </div>
-            <div class="col">
-                <div class="media">
-                    <div class="media-body align-self-center">
-                        <h3>React Lake Campground</h3>
-                        <p class="d-none d-sm-block">Nestled in the foothills of the Chrome Mountains, this campground on the shores of the pristine React Lake is a favorite for fly fishers.</p>
+                    <div id="campsites" class="tab-pane fade" role="tabpanel">
+                        <p class="d-none d-sm-block">Nestled in the foothills of the Chrome Mountains, this campground on the shores of the pristine 
+                        React Lake is a favorite for fly fishers.</h4>
                     </div>
-                    <img class="d-flex ml-3 img-thumbnail" src="/img/react-lake-thumb.jpg" alt="React Lake" />
-                </div>
-            </div>
-        </div>
-
-        <div class="row row-content align-items-center">
-            <div class="col-sm-4 order-sm-last col-md-3">
-                <h2 class="text-sm-right">Our Community Partners</h2>
-            </div>
-            <div class="col">
-                <div class="media">
-                    <img class="d-flex mr-3 img-thumbnail" src="/img/bootstrap-thumb.png" alt="Bootstrap Outfitters" />
-                    <div class="media-body align-self-center">
-                        <h3>Bootstrap Outfitters</h3>
-                        <p class="d-none d-sm-block">Bootstrap Outfitters supplies you with gear you need at prices you can't beat.</p>
+                    <div id="community" class="tab-pane fade" role="tabpanel">
+                        <p class="d-none d-sm-block">Bootstrap Outfitters supplies you with gear you need at prices you can't beat.</h4>
                     </div>
                 </div>
             </div>
