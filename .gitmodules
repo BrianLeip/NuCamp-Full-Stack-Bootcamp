@@ -1,3 +1,6 @@
 [submodule "nucamp-git-test"]
 	path = nucamp-git-test
 	url = git@github.com:BrianLeip/nucamp-git-test.git
+[submodule "Portfolio-Project-1/content-creator-site-template"]
+	path = Portfolio-Project-1/content-creator-site-template
+	url = git@github.com:BrianLeip/content-creator-site-template.git
