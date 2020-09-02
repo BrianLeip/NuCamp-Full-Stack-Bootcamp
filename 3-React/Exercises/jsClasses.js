@@ -56,7 +56,7 @@ class Warlock extends Demon {
     this.element = element;
   }
   castSpell() {
-    console.log(`The ${this.color} ${this.element} ${this.type} gathers energy into the orb on it's wand and begins to cast a spell.`)
+    console.log(`The ${this.color} ${this.type} gathers energy into the ${this.element} orb on it's wand and begins to cast a spell.`)
   }
 }
 
