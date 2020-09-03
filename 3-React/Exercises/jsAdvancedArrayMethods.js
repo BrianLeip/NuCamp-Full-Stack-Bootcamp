@@ -133,3 +133,21 @@ bird.fly = function() {
 }
 console.log("\nChained:")
 bird.sing().fly();  // now you can chain the methods
+
+// for chaining to work, you need to `return this` on all methods except the last method called
+const horse = { 
+  trot() {
+      console.log("The horse begins to trot.");
+      return this;
+  },
+  gallop() {
+      console.log("The horse begins to gallop.")
+      return this;
+  },
+  sprint() {
+    console.log("The horse begins to sprint.")
+    // return this;
+  }
+};
+
+horse.gallop().trot().sprint();
