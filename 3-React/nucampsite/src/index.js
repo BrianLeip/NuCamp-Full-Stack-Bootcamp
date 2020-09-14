@@ -5,8 +5,8 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'typeface-lobster';
 import 'typeface-open-sans';
-// import App from './App';
-import { App } from './App';  // alternative method using a named export
+import App from './App';
+// import { App } from './App';  // alternative method using a named export
 
 ReactDOM.render(
   <React.StrictMode>

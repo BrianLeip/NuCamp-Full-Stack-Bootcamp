@@ -26,5 +26,5 @@ class App extends Component {
     }
 }
 
-// export default App;
-export { App }; // alternative method using a named export
+export default App;
+// export { App }; // alternative method using a named export
