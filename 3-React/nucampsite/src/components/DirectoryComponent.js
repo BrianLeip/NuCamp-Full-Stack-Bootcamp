@@ -14,6 +14,19 @@ class Directory extends Component {
     this.setState({selectedCampsite: campsite});  // ALWAYS USE setState() TO MODIFY STATE PROPERTIES
   }
 
+  renderSelectedCampsite(campsite) {
+    if(campsite) {
+      return (
+        <Card>
+          <CardImg top src={campsite.image} alt={campsite.name} />
+          <CardTitle>{campsite.name}</CardTitle>
+          <CardText>{campsite.description}</CardText>
+        </Card>
+      );
+    }
+    return <div />;
+  }
+
   render() {
     const directory = this.props.campsites.map(campsite => {
       return (
@@ -27,10 +40,16 @@ class Directory extends Component {
         </div>
       );
     });
+
     return (
       <div className="container">
         <div className="row">
           {directory}
+        </div>
+        <div className="row">
+          <div className="col-md-5 m1">
+            {this.renderSelectedCampsite(this.state.selectedCampsite)}
+          </div>
         </div>
       </div>
     );
