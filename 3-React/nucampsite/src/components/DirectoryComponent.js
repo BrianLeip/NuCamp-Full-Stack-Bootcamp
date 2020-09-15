@@ -15,19 +15,6 @@ class Directory extends Component {
     this.setState({selectedCampsite: campsite});  // ALWAYS USE setState() TO MODIFY STATE PROPERTIES
   }
 
-  renderSelectedCampsite(campsite) {
-    if(campsite) {
-      return (
-        <Card>
-          <CardImg top src={campsite.image} alt={campsite.name} />
-          <CardTitle>{campsite.name}</CardTitle>
-          <CardText>{campsite.description}</CardText>
-        </Card>
-      );
-    }
-    return <div />;
-  }
-
   render() {
     const directory = this.props.campsites.map(campsite => {
       return (
