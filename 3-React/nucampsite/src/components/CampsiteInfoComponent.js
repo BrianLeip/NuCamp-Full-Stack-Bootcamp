@@ -52,5 +52,4 @@ function CampsiteInfo(props) {
   else { return <div />; }
 }
 
-
 export default CampsiteInfo;
