@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Card, CardImg, CardText, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function RenderCampsite({campsite}) {
@@ -8,7 +8,6 @@ function RenderCampsite({campsite}) {
       <div className="col-md-5 m-1">
         <Card>
           <CardImg top src={campsite.image} alt={campsite.name} />
-          <CardTitle>{campsite.name}</CardTitle>
           <CardText>{campsite.description}</CardText>
         </Card>
       </div>
