@@ -1,0 +1,8 @@
+body {
+  font-family: 'Oxygen', sans-serif; 
+  margin: 1rem;
+}
+pre {
+  font-size: 1.2em;
+  background: lightblue;
+}
