@@ -3,6 +3,12 @@ import { Card, CardImg, CardText, Breadcrumb, BreadcrumbItem, Button, Modal, Mod
 import { Link } from 'react-router-dom';
 import { Control, LocalForm } from 'react-redux-form';
 
+const required = val => val && val.length;  // makes sure that the value is not null and it contains at least 1 item
+const maxLength = len => val => !val || (val.length <= len);
+const minLength = len => val => val && (val.length >= len);
+const isNumber = val => !isNaN(+val); // checks that val is a number (+ symbol is a shortcut to convert text to num)
+const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);  // regex to confirm valid email format
+
 function RenderCampsite({campsite}) {
   if(campsite) {
     return (
@@ -106,12 +112,12 @@ class CommentForm extends Component {
                 </Control.select>
               </div>
               <div className="form-group">
-                <Label>Author</Label>
+                <Label htmlFor="author">Author</Label> 
                 <Control.text model=".author" id="author" name="author" placeholder="Author" className="form-control"/>
               </div>
               <div className="form-group">
-                <Label>Text</Label>
-                <Control.textarea model=".text" id="text" name="text" placeholder="Text" className="form-control"/>
+                <Label htmlFor="text">Text</Label>
+                <Control.textarea rows="6" model=".text" id="text" name="text" placeholder="Text" className="form-control"/>
               </div>
               <Button type="submit" id="submit" name="submit" color="primary">Submit</Button>
             </LocalForm>
