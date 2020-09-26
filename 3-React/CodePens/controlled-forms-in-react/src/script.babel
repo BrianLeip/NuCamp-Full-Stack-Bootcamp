@@ -1,0 +1,34 @@
+// Example exercise from this article on Medium https://medium.com/byte-sized-react/controlled-forms-in-react-68e59362a119
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = ({input: ''});
+    this.formUpdate = this.formUpdate.bind(this);
+  }
+  
+  formUpdate(event) {
+    this.setState({input: event.target.value});
+  }
+  
+  render() {
+    return (
+      <div className="form-group container">
+        <label>Controlled Form Input</label>
+        <input type="text" 
+          className="form-control" 
+          aria-describedby="emailHelp" 
+          placeholder="Update input here" 
+          value={this.state.input}
+          onChange={this.formUpdate}/>
+         <large className="form-text text-muted">
+           {this.state.input}
+         </large>
+      </div>
+    );
+  }
+}
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
