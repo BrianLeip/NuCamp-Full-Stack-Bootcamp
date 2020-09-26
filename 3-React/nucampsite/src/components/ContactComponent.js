@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 class Contact extends Component {
@@ -12,10 +12,22 @@ class Contact extends Component {
       email: '',
       agree: false,
       contactType: 'By Phone',
-      feedback: ''
+      feedback: '',
+      touched: {
+        firstName: false,
+        lastName: false,
+        phoneNum: false,
+        email: false
+      }
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleBlur = (field) => () => {
+    this.setState({
+      touched: {...this.state.touched, [field]: true}
+    });
   }
 
   handleInputChange(event) {
@@ -79,6 +91,7 @@ class Contact extends Component {
                   <Input type="text" id="firstName" name="firstName"
                     placeholder="First Name"
                     value={this.state.firstName}
+                    onBlue={this.handleBlur("firstName")}
                     onChange={this.handleInputChange} />
                 </Col>
               </FormGroup>
@@ -88,6 +101,7 @@ class Contact extends Component {
                   <Input type="text" id="lastName" name="lastName"
                     placeholder="Last Name"
                     value={this.state.lastName}
+                    onBlue={this.handleBlur("lastName")}
                     onChange={this.handleInputChange} />
                 </Col>
               </FormGroup>
@@ -97,6 +111,7 @@ class Contact extends Component {
                   <Input type="tel" id="phoneNum" name="phoneNum"
                     placeholder="Phone number"
                     value={this.state.phoneNum}
+                    onBlue={this.handleBlur("phoneNum")}
                     onChange={this.handleInputChange} />
                 </Col>
               </FormGroup>
@@ -106,6 +121,7 @@ class Contact extends Component {
                   <Input type="email" id="email" name="email"
                     placeholder="Email"
                     value={this.state.email}
+                    onBlue={this.handleBlur("email")}
                     onChange={this.handleInputChange} />
                 </Col>
               </FormGroup>
