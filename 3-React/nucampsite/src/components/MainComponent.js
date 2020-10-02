@@ -8,6 +8,7 @@ import About from "./AboutComponent";
 import CampsiteInfo from "./CampsiteInfoComponent";
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { addComment } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
@@ -17,6 +18,10 @@ const mapStateToProps = state => {
         promotions: state.promotions
     };
 }
+
+const mapDispatchToProps = {
+    addComment: (campsiteId, rating, author, text) => (addComment(campsiteId, rating, author, text))
+};
 
 class Main extends Component {
 
@@ -36,6 +41,7 @@ class Main extends Component {
                 <CampsiteInfo 
                     campsite={this.props.campsites.filter(campsite => campsite.id === +match.params.campsiteId)[0]} // the `+` before `match` is a shortcut to convert string to number
                     comments={this.props.comments.filter(comment => comment.campsiteId === +match.params.campsiteId)} 
+                    addComment={this.props.addComment}
                 />
             );
         }
@@ -57,7 +63,7 @@ class Main extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
 // NOTE: when using Route and need to pass along state data, use render().  Otherwise, use component=
 // NOTE 2: the `:` symbol is very important in `/directory/:campsiteId`.  It tells router that anything after the : is a parameter and
 //         puts the variable inside `campsiteId`. Then the router stores an object called `match` which has params.  The campsiteId
