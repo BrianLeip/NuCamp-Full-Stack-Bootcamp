@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components'
 
 const required = val => val && val.length;  // makes sure that the value is not null and it contains at least 1 item
 const maxLength = len => val => !val || (val.length <= len);
@@ -13,10 +14,16 @@ function RenderCampsite({campsite}) {
   if(campsite) {
     return (
       <div className="col-md-5 m-1">
-        <Card>
-          <CardImg top src={baseUrl + campsite.image} alt={campsite.name} />
-          <CardText>{campsite.description}</CardText>
-        </Card>
+        <FadeTransform
+          in
+          transformProps={{
+            exitTransform: 'scale(0.5) translateY(50%)'
+          }}>
+            <Card>
+              <CardImg top src={baseUrl + campsite.image} alt={campsite.name} />
+              <CardText>{campsite.description}</CardText>
+            </Card>
+        </FadeTransform>
       </div>
     );
   } else {
@@ -29,16 +36,19 @@ function RenderComments({comments, postComment, campsiteId}) {
     return (
       <div className="col-md-5 m-1">
         <h4>Comments</h4>
-        { 
-          comments.map(comment => {
-            return (
-              <div>
-                <p>{comment.text}</p>
-                <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
-              </div>
-            )
-          })
-        }
+        <Stagger in>
+            { comments.map(comment => {
+                return (
+                  <Fade in key={comment.id}>
+                    <div>
+                      <p>{comment.text}</p>
+                      <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                    </div>
+                  </Fade>
+                )
+              })
+            }
+        </Stagger>
         <CommentForm campsiteId={campsiteId} postComment={postComment} />
       </div>
     ); 
