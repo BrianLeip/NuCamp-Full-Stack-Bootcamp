@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - React Challenge: Redux</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1>Instructions</h2>
+<p>Below is a pared-down demonstration of React and Redux working together. It has the essential elements you need to connect/subscribe a React component to the Redux store for data, to dispatch actions, and to update the store's state using a reducer.</p>
+<p><strong>Challenge 1: Fix the existing code</strong></p>
+<p>When you enter a name and a course and hit the "Add Instructor" button, it should update the instructors list in the view. However, it isn't working right now, and lucky you, you get to debug it. <i>Note: This is more of a React review challenge than a Redux one.</i> </p>
+<ol>
+  <li>Why is the <strong>instructorsList</strong> component not rendering? Fix this first so that you can see the list. Hint: It's a small but important typographical error.</li>
+  <li>In the AddInstructor component, the event handler has not been bound correctly. Can you fix it? There are two different and acceptable ways to do this. Refer to <a href="https://codepen.io/minae/pen/KJMYEO" target="_blank">this demo</a> -- specifically, GoodExample1 and ArrowExample2.</li>
+
+</ol>
+
+<p><strong>Challenge 2: Update the fixed code</strong></p>
+<p>
+For this part of the challenge, add a 'Color' field to the form, next to "Course Taught". Then update the code so that the background color of the instructor name renders as the color that you enter. You will need to update multiple places in the code for this to work: in the reducer, the action, and a couple of other places in addition to the form. </p>
+<p>Note: In the reducer, instructor.color is currently hardcoded to black (#000). When you are at this part of the challenge, remove this line completely along with the other changes.</p>
+
+<p>Good luck!</p>
+
+<div id="root"></div>
+
+<!-- original pen by minae lee -->
+<!-- with thanks to https://codepen.io/allanpope/pen/GqjxPz for a jumpoff point -->
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/react/16.13.1/umd/react.production.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.0/react-redux.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
