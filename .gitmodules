@@ -4,3 +4,6 @@
 [submodule "Portfolio-Project-1/content-creator-site-template"]
 	path = Portfolio-Project-1/content-creator-site-template
 	url = git@github.com:BrianLeip/content-creator-site-template.git
+[submodule "Portfolio-Project-2/bldev-portfolio-site"]
+	path = Portfolio-Project-2/bldev-portfolio-site
+	url = git@github.com:BrianLDev/bldev-portfolio-site.git
