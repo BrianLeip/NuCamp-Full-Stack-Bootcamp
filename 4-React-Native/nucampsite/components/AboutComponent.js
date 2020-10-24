@@ -10,7 +10,7 @@ class About extends Component {
   render() {
     return (
       <ScrollView>
-
+        
       </ScrollView>
     );
   }
