@@ -1,0 +1,9 @@
+json server terminal command
+
+NOTE 1: Make sure to run this command from within the json-server folder, otherwise it will just create an empty database in the folder you run the script from and you won't have access to your data
+
+NOTE 2: the number after d is the simulated delay in milliseconds.  For a shorter delay, lower that number
+
+ 
+
+json-server -H 0.0.0.0 --watch db.json -p 3001 -d 2000
