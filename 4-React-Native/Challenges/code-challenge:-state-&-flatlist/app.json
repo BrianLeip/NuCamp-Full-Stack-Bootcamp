@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "code-challenge:-state-&-flatlist",
+    "slug": "snack-23665631-6323-4bd4-b8b7-23c3a1243764",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "description": "React Native Code Challenge: FlatList and ListItem"
+  }
+}
