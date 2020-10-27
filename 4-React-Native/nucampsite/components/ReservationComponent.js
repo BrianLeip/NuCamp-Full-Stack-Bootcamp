@@ -26,7 +26,7 @@ class Reservation extends Component {
     });
   }
 
-  remder() {
+  render() {
     return (
       <ScrollView>
         <View>
