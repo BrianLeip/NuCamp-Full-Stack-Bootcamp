@@ -13,7 +13,7 @@ class Reservation extends Component {
     };
   }
 
-  static navigationOptinos = {
+  static navigationOptions = {
     title: 'Reserve Campsite'
   }
 
@@ -29,9 +29,10 @@ class Reservation extends Component {
   render() {
     return (
       <ScrollView>
-        <View>
-          <Text>Number of Campers</Text>
-          <Picker 
+        <View style={styles.formRow}>
+          <Text style={styles.formLabel}>Number of Campers</Text>
+          <Picker
+            style={styles.formItem}
             selectedValue={this.state.campers}
             onValueChange={itemValue => this.setState({campers: itemValue})}
           >
@@ -43,16 +44,17 @@ class Reservation extends Component {
             <Picker.Item label='6' value='6' />
           </Picker>
         </View>
-        <View>
-          <Text>Hike-In?</Text>
+        <View style={styles.formRow}>
+          <Text style={styles.formLabel}>Hike-In?</Text>
           <Switch
+            style={styles.formItem}
             value={this.state.hikeIn}
             trackColor={{true: '#5637DD', false: null}}
             onValueChange={value => this.setState({hikeIn: value})}
           />
         </View>
-        <View>
-          <Text>Date</Text>
+        <View style={styles.formRow}>
+          <Text style={styles.formLabel}>Date</Text>
           <Button
             onPress={() => 
               this.setState({showCalendar: !this.state.showCalendar})
@@ -64,6 +66,7 @@ class Reservation extends Component {
         </View>
         {this.state.showCalendar && ( // the && here causes the DateTimePicker to be ignored if !showCalender
           <DateTimePicker
+            style={styles.formItem}
             value={this.state.date}
             mode={'date'}
             display='default'
@@ -72,7 +75,7 @@ class Reservation extends Component {
             }}
           />
         )}
-        <View>
+        <View style={styles.formRow}>
           <Button
             onPress={() => this.handleReservation()}
             title='Search'
@@ -83,8 +86,23 @@ class Reservation extends Component {
       </ScrollView>
     )
   }
-
-  
 }
+
+const styles = StyleSheet.create({
+  formRow: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      flex: 1,
+      flexDirection: 'row',
+      margin: 20
+  },
+  formLabel: {
+      fontSize: 18,
+      flex: 2
+  },
+  formItem: {
+      flex: 1
+  }
+});
 
 export default Reservation;
