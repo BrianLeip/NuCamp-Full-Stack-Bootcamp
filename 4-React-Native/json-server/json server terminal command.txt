@@ -6,4 +6,4 @@ NOTE 2: the number after d is the simulated delay in milliseconds.  For a shorte
 
  
 
-json-server -H 0.0.0.0 --watch db.json -p 3001 -d 2000
+json-server -H 0.0.0.0 --watch db.json -p 3001 -d 1000
