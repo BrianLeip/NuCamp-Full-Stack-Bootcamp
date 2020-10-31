@@ -39,9 +39,9 @@ class Reservation extends Component {
   reservationAlert() {
     Alert.alert(
       'Begin Search?',
-      'Number of Campers: ' + this.state.campers +
-      '\n\nHike-In? ' + this.state.hikeIn + 
-      '\n\nDate: ' + this.state.date,
+      'Number of Campers:  ' + this.state.campers +
+      '\n\nHike-In?  ' + this.state.hikeIn + 
+      '\n\nDate:  ' + this.state.date.toLocaleDateString('en-US'),
       [
         {
           text: 'Cancel',
