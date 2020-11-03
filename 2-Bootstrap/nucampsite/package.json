@@ -19,17 +19,17 @@
   "author": "Brian Leip",
   "license": "ISC",
   "devDependencies": {
-    "copyfiles": "^2.3.0",
+    "copyfiles": "^2.4.0",
     "imagemin-cli": "^5.1.0",
     "lite-server": "^2.5.4",
     "node-sass": "^4.14.1",
-    "onchange": "^7.0.2",
+    "onchange": "^7.1.0",
     "parallelshell": "^3.0.2",
     "rimraf": "^3.0.2",
     "usemin-cli": "^0.6.0"
   },
   "dependencies": {
-    "bootstrap": "^4.5.2",
+    "bootstrap": "^4.5.3",
     "bootstrap-social": "^5.1.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
