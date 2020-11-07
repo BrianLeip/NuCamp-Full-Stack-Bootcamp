@@ -23,7 +23,7 @@ class LoginTab extends Component {
     title: 'Login',
     tabBarIcon: ({tintColor}) => (
       <Icon
-        name='sign-in'
+        name='camera'
         type='font-awesome'
         iconStyle={{color: tintColor}}
       />
@@ -161,6 +161,22 @@ class RegisterTab extends Component {
     }
   }
 
+  getImageFromGallery = async () => {
+    const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
+    const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+    if (cameraPermission.status === 'granted' && cameraRollPermission.status === 'granted') {
+      const selectedImage = await ImagePicker.launchImageLibraryAsync({
+        allowEditing: true,
+        aspect: [1, 1]
+      });
+      if (!selectedImage.cancelled) {
+        console.log(selectedImage);
+        this.processImage(selectedImage.uri)
+      }
+    }
+  }
+
   processImage = async (imgUri) => {
     const processedImage = await ImageManipulator.manipulateAsync(
       uri = imgUri,
@@ -197,8 +213,14 @@ class RegisterTab extends Component {
               style={styles.image}
             />
             <Button
-              title='Get Image from Camera'
+              // title='Get Image from Camera'
               onPress={this.getImageFromCamera}
+              icon={{type:'font-awesome', name: 'camera'}}
+            />
+            <Button
+              // title='Get Image from Camera'
+              onPress={this.getImageFromGallery}
+              icon={{type:'font-awesome-5', name: 'images'}}
             />
           </View>
           <Input 
