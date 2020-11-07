@@ -142,6 +142,22 @@ class RegisterTab extends Component {
     )
   }
 
+  getImageFromCamera = async () => {
+    const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
+    const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+    if (cameraPermission.status === 'granted' && cameraRollPermission.status === 'granted') {
+      const capturedImage = await ImagePicker.launchCameraAsync({
+        allowEditing: true,
+        aspect: [1, 1]
+      });
+      if (!capturedImage.cancelled) {
+        console.log(capturedImage);
+        this.setState({imageUrl: capturedImage.uri})
+      }
+    }
+  }
+
   handleRegister() {
     console.log(JSON.stringify(this.state));
     if (this.state.remember) {
@@ -161,6 +177,17 @@ class RegisterTab extends Component {
     return (
       <ScrollView>
         <View style={StyleSheet.container}>
+          <View style={styles.imageContainer}>
+            <Image
+              source={{uri: this.state.imageUrl}}
+              loadingIndicatorSource={require('./images/logo.png')}
+              style={styles.image}
+            />
+            <Button
+              title='Get Image from Camera'
+              onPress={this.getImageFromCamera}
+            />
+          </View>
           <Input 
             placeholder='Username'
             leftIcon={{type: 'font-awesome', name: 'user-o'}}
@@ -248,20 +275,33 @@ const Login = createBottomTabNavigator(
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    margin: 20
+    margin: 10
   },
   formIcon: {
     marginRight: 10,
   },
   formInput: {
-    padding: 10
+    padding: 8
   },
   formCheckbox: {
-    margin: 10,
+    margin: 8,
     backgroundColor: null
   },
   formButton: {
-    margin: 40
+    margin: 20,
+    marginRight: 40,
+    marginLeft: 40
+  },
+  imageContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    margin: 10
+  },
+  image: {
+    width: 60,
+    height: 60
   }
 });
 
