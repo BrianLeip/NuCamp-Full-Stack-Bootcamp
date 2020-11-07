@@ -5,6 +5,7 @@ import * as SecureStore from 'expo-secure-store';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as ImageManipulator from 'expo-image-manipulator';
+import * as MediaLibrary from 'expo-media-library';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { baseUrl } from '../shared/baseUrl';
 
@@ -183,6 +184,7 @@ class RegisterTab extends Component {
       saveOptions = {format: ImageManipulator.SaveFormat.PNG}
     )
     console.log(processedImage)
+    MediaLibrary.saveToLibraryAsync(processedImage.uri) // note - this works great but also saves duplicates when getting image from gallery. TODO: only save 
     this.setState({imageUrl: processedImage.uri})
   };
 
@@ -199,7 +201,7 @@ class RegisterTab extends Component {
       SecureStore.deleteItemAsync('userinfo')
         .catch(error => console.log('Cound not delete user info: ', error));
     }
-  }
+  };
 
   render() {
     return (
