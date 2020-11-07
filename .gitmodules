@@ -7,3 +7,6 @@
 [submodule "Portfolio-Project-2/bldev-portfolio-site"]
 	path = Portfolio-Project-2/bldev-portfolio-site
 	url = git@github.com:BrianLDev/bldev-portfolio-site.git
+[submodule "Portfolio-Project-3/goal-tracker-mobile"]
+	path = Portfolio-Project-3/goal-tracker-mobile
+	url = git@github.com:BrianLDev/goal-tracker-mobile.git
