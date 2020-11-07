@@ -185,6 +185,7 @@ class RegisterTab extends Component {
     )
     console.log(processedImage)
     this.setState({imageUrl: processedImage.uri})
+    // Bonus challenge improvement: Created an Alert that allows user to decide if they want to save the image to gallery or not.
     Alert.alert(
       'Save Image',
       'Save image to photo gallery?',
