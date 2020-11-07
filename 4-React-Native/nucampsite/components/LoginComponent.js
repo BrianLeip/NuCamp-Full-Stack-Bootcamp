@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, Image } from 'react-native';
+import { View, StyleSheet, ScrollView, Image, Alert } from 'react-native';
 import { Input, CheckBox, Button, Icon } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import * as ImagePicker from 'expo-image-picker';
@@ -184,8 +184,22 @@ class RegisterTab extends Component {
       saveOptions = {format: ImageManipulator.SaveFormat.PNG}
     )
     console.log(processedImage)
-    MediaLibrary.saveToLibraryAsync(processedImage.uri) // note - this works great but also saves duplicates when getting image from gallery. TODO: only save 
     this.setState({imageUrl: processedImage.uri})
+    Alert.alert(
+      'Save Image',
+      'Save image to photo gallery?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Image not saved'),
+          style: 'cancel'
+        },
+        {
+          text: 'OK',
+          onPress: () => MediaLibrary.saveToLibraryAsync(processedImage.uri)
+        }
+      ]
+    )
   };
 
   handleRegister() {
