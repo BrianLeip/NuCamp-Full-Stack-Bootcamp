@@ -1,7 +1,8 @@
 // module.exports.perimeter = (x, y) => 2 * (x + y);
 // module.exports.area = (x, y) => x * y;
 
-module.exports = (x, y, callback) => {
+
+const rect = (x, y, callback) => {   // using ES6 export format
   if (x <= 0 || y <= 0) {
     callback(new Error(`Rectangle dimensions must be greater than zero.  Received: ${x}, ${y}`));
   } else {
@@ -15,8 +16,4 @@ module.exports = (x, y, callback) => {
   }
 }
 
-
-// const rectFunctions = {
-//   perimeter: (x, y) => 2 * (x + y),
-//   area: (x, y) => x * y
-// }
+module.exports = rect;    // CommonJS Node export format

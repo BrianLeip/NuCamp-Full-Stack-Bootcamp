@@ -1,4 +1,5 @@
-const rect = require('./rectangle');  // CommonJS import format
+// NOTE: to run this ES6 import version, need to type `node --experimental-modules app.mjs`
+import rect from './rectangle.js';       // ES6 import format
 
 function solveRect(l, w) {
   console.log(`  Solving for rectangle with dimensions: ${l}, ${w}`);
