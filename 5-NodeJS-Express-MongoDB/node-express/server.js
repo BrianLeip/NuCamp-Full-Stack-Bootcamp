@@ -1,15 +1,18 @@
 const express = require('express');
 const morgan = require('morgan');
 const campsiteRouter = require('./routes/campsiteRouter');
+const promotionsRouter = require('./routes/promotionsRouter');
 
 const hostname = 'localhost';
 const port = 3000;
 
 const app = express();
-app.use(morgan('dev'));   // use development version of morgan
+// app.use(morgan('dev'));   // use development version of morgan
 app.use(express.json());  // parses json data into JS properties so we can use it
 
-app.use('/campsites', campsiteRouter);
+// app.use('/campsites', campsiteRouter);
+app.use('/', campsiteRouter);
+app.use('/', promotionsRouter);
 
 app.use(express.static(__dirname + '/public'));
 

@@ -1,7 +1,8 @@
 const express = require('express');
 const campsiteRouter = express.Router();
+campsiteRouter.use(express.json()); // parses json data into JS properties so we can use it
 
-campsiteRouter.route('/')           // chaining all verbs to this router below
+campsiteRouter.route('/campsites')  // chaining all verbs to this router below
 .all((req, res, next) => {          // .all is catch all for all HTTP verbs
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
@@ -21,8 +22,8 @@ campsiteRouter.route('/')           // chaining all verbs to this router below
   res.end('Deleting all campsites');
 });
 
-campsiteRouter.route('/:campsiteId')  // chaining all verbs to this router below
-.all((req, res, next) => {            // .all is catch all for all HTTP verbs
+campsiteRouter.route('/campsites/:campsiteId')  // chaining all verbs to this router below
+.all((req, res, next) => {                      // .all is catch all for all HTTP verbs
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   next();
