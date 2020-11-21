@@ -5,7 +5,7 @@ promotionsRouter.use(express.json()); // parses json data into JS properties so 
 promotionsRouter.route('/promotions')   // chaining all verbs to this router below
 .all((req, res, next) => {
   res.statusCode = 200;
-  res.setHeader("Content-type", "text/plain");
+  res.setHeader("Content-Type", "text/plain");
   next();
 })
 .get((req, res) => {
