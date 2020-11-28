@@ -29,7 +29,7 @@ partnersRouter.route('/')
 })
 .delete((req, res, next) => {
   console.log('Deleting all partners');
-  Campsite.deleteMany()
+  Partner.deleteMany()
     .then(response => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
