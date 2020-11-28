@@ -12,7 +12,7 @@ connect.then(() => {
   console.log('Connected successfully to the server');
   const newCampsite = new Campsite({
     name: 'React Lake Campground',
-    description: 'test'
+    description: 'test'             // note - if this description was excluded, mongoose would throw an error since it needs to match the Schema
   });
 
   newCampsite.save()
