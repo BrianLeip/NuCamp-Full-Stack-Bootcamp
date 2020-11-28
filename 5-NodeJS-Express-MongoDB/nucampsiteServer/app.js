@@ -24,9 +24,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/campsites', campsiteRouter);
-app.use('/promotions', promotionsRouter);
-app.use('/partners', partnersRouter);
+// app.use('/campsites', campsiteRouter);
+// app.use('/promotions', promotionsRouter);
+// app.use('/partners', partnersRouter);
+app.use('/', campsiteRouter);   // BL NOTE - moved the url extensions to within each .js router files
+app.use('/', promotionsRouter);
+app.use('/', partnersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
