@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const Campsite = require('./models/campsite');
 
 const url = 'mongodb://localhost:27017/nucampsite'; // 27017 is the default for mongodb, nucampsite is the database we created
+
 const connect = mongoose.connect(url, {
   useCreateIndex: true, // these 3 options just avoid deprecation warnings
+  useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -28,7 +30,22 @@ connect.then(() => {
   .then(campsite => {
     console.log("Finding campsite: ");
     console.log(campsite);
-    return Campsite.find();
+    // return Campsite.find();
+    return Campsite.findByIdAndUpdate(campsite._id, {
+      $set: { description: 'Updated Test Document' }
+    }, {
+      new: true
+    });
+  })
+  .then(campsite => {
+    console.log("Adding a comment to: ");
+    console.log(campsite);
+    campsite.comments.push({
+      rating: 5,
+      text: 'What a magnificent view!',
+      author: 'Tinus Lorvaldes'
+    });
+    return campsite.save();
   })
   .then(campsites => {
     console.log("Deleting all campsites: ");
