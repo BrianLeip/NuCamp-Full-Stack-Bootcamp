@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;   // just to make a shorthand for mongoose.Schema
 require('mongoose-currency').loadType(mongoose);
+
+const Schema = mongoose.Schema;   // just to make a shorthand for mongoose.Schema
 
 const Currency = mongoose.Types.Currency;
 
