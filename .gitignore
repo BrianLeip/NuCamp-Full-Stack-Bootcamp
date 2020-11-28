@@ -35,5 +35,5 @@ npm-debug.*
 *.orig.*
 web-build/
 
-# mongodb
-journal/
+# mongodb folder and data subfolder holding the database
+mongodb/
