@@ -153,7 +153,7 @@ campsiteRouter.route('/campsites/:campsiteId/comments')  // BL NOTE - I put /cam
       .catch(err => next(err));
   });
 
-campsiteRouter.route('/:campsiteId/comments/:commentId')
+campsiteRouter.route('/campsites/:campsiteId/comments/:commentId')
   .get((req, res, next) => {
     Campsite.findById(req.params.campsiteId)
       .then(campsite => {
