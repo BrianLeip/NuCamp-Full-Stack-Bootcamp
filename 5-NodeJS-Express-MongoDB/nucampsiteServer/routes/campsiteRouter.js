@@ -6,7 +6,6 @@ campsiteRouter.use(express.json()); // parses json data into JS properties so we
 
 campsiteRouter.route('/')
   .get((req, res, next) => {
-    // res.end('Will send all the campsites to you');
     Campsite.find()
       .then(campsites => {
         res.statusCode = 200;
@@ -16,7 +15,6 @@ campsiteRouter.route('/')
       .catch(err => next(err));
   })
   .post((req, res, next) => {
-    // res.end(`Will add the campsite: ${req.body.name} with description: ${req.body.description}`);
     Campsite.create(req.body)
       .then(campsite => {
         console.log('Campsite Created: ', campsite);
@@ -42,13 +40,7 @@ campsiteRouter.route('/')
   });
 
 campsiteRouter.route('/:campsiteId')
-  // .all((req, res, next) => {                      // chaining all verbs to this router using promises  .all is catch all for all HTTP verbs
-  //   res.statusCode = 200;
-  //   res.setHeader('Content-Type', 'text/plain');
-  //   next();
-  // })
   .get((req, res, next) => {
-    // res.end(`Will send details of the campsite: ${req.params.campsiteId} to you.`)
     Campsite.findById(req.params.campsiteId)
       .then(campsite => {
         res.statusCode = 200;
@@ -63,7 +55,6 @@ campsiteRouter.route('/:campsiteId')
   })
   .put((req, res, next) => {
     console.log(`Updating the campsite: ${req.params.campsiteId}.\n`);
-    // res.end(`Will update the campsite: ${req.body.name} with description ${req.body.description}`);
     Campsite.findByIdAndUpdate(req.params.campsiteId, {
       $set: req.body
     }, { new: true })

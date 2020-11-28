@@ -1,33 +1,38 @@
 const express = require('express');
+const Promotion = require('../models/promotion');
+
 const promotionsRouter = express.Router();
 promotionsRouter.use(express.json()); // parses json data into JS properties so we can use it
 
 promotionsRouter.route('/')   // chaining all verbs to this router below
-.all((req, res, next) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  next();
+.get((req, res, next) => {
+  Promotion.find()
+  .then(promotion => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(promotion);
+  })
+  .catch(err => next(err));
 })
-.get((req, res) => {
-  res.end('Will send all the promotions to you');
-})
-.post((req, res) => {
-  res.end(`Will add the promotion: ${req.body.name} with description: ${req.body.description}`);
+.post((req, res, next) => {
+  Promotion.create(req.body)
+  .then(promotion => {
+    console.log('Partner Created: ', partner);
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(partner);
+  })
+  .catch(err => next(err));
 })
 .put((req, res) => {
   res.statusCode = 403;
   res.end('PUT operation not supported on /promotions');
 })
-.delete((req, res) => {
-  res.end('Deleting all promotions');
+.delete((req, res, next) => {
+  console.log('Deleting all promotions');
 });
 
 promotionsRouter.route('/:promotionId')  // chaining all verbs to this router below
-.all((req, res, next) => {                      // .all is catch all for all HTTP verbs
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  next();
-})
 .get((req, res) => {
   res.end(`Will send details of the promotion: ${req.params.promotionId} to you.`)
 })

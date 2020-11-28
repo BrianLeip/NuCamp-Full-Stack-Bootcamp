@@ -1,10 +1,10 @@
 const express = require('express');
 const Partner = require('../models/partner');
+
 const partnersRouter = express.Router();
 
 partnersRouter.route('/')
 .get((req, res, next) => {
-  // res.end('Will send all the partners to you');
   Partner.find()
   .then(partners => {
     res.statusCode = 200;
@@ -14,7 +14,6 @@ partnersRouter.route('/')
   .catch(err => next(err));
 })
 .post((req, res, next) => {
-  // res.end(`Will add the partner: ${req.body.name} with description: ${req.body.description}`);
   Partner.create(req.body)
   .then(partner => {
     console.log('Partner Created: ', partner);
@@ -29,7 +28,6 @@ partnersRouter.route('/')
   res.end('PUT operation not supported on /partners');
 })
 .delete((req, res, next) => {
-  // res.end('Deleting all partners');
   console.log('Deleting all partners');
   Campsite.deleteMany()
     .then(response => {
@@ -43,7 +41,6 @@ partnersRouter.route('/')
 
 partnersRouter.route('/:partnerId')
 .get((req, res, next) => {
-  // res.end(`Will send details of the partner: ${req.params.partnerId} to you.`)
   Partner.findById(req.params.partnerId)
   .then(partner => {
     res.statusCode = 200;
@@ -58,7 +55,6 @@ partnersRouter.route('/:partnerId')
 })
 .put((req, res, next) => {
   console.log(`Updating the partner: ${req.params.partnerId}.\n`);
-  // res.end(`Will update the partner: ${req.body.name} with description ${req.body.description}`);
   Partner.findByIdAndUpdate(req.params.partnerId, {
     $set: req.body
   }, { new: true })
