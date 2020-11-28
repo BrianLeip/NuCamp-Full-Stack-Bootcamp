@@ -17,14 +17,16 @@ connect.then(() => {
 
   newCampsite.save()
   .then(campsite => {
-    console.log(campsite);
+    console.log("Saving campsite: " + campsite);
     return Campsite.find();
   })
   .then(campsites => {
+    console.log("Deleting all campsites: ");
     console.log(campsites);
     return Campsite.deleteMany();
   })
   .then(() => {
+    console.log("Done...shutting down.");
     return mongoose.connection.close();
   })
   .catch(err => {
