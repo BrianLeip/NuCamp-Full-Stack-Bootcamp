@@ -2,7 +2,7 @@ const express = require('express');
 const promotionsRouter = express.Router();
 promotionsRouter.use(express.json()); // parses json data into JS properties so we can use it
 
-promotionsRouter.route('/promotions')   // chaining all verbs to this router below
+promotionsRouter.route('/')   // chaining all verbs to this router below
 .all((req, res, next) => {
   res.statusCode = 200;
   res.setHeader("Content-Type", "text/plain");
@@ -22,7 +22,7 @@ promotionsRouter.route('/promotions')   // chaining all verbs to this router bel
   res.end('Deleting all promotions');
 });
 
-promotionsRouter.route('/promotions/:promotionId')  // chaining all verbs to this router below
+promotionsRouter.route('/:promotionId')  // chaining all verbs to this router below
 .all((req, res, next) => {                      // .all is catch all for all HTTP verbs
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');

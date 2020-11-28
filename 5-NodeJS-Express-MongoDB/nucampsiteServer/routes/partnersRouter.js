@@ -1,7 +1,7 @@
 const express = require('express');
 const partnersRouter = express.Router();
 
-partnersRouter.route('/partners')
+partnersRouter.route('/')
 .all((req, res, next) => {
   res.statusCode = 200;
   res.setHeader("Content-Type", "text/plain")
@@ -22,7 +22,7 @@ partnersRouter.route('/partners')
 });
 
 
-partnersRouter.route('/partners/:partnerId')
+partnersRouter.route('/:partnerId')
 .all((req, res, next) => {
   res.statusCode = 200;
   res.setHeader("Content-Type", "text/plain")

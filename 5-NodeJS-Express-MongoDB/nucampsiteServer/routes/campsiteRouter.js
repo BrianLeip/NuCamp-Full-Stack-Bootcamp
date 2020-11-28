@@ -4,12 +4,7 @@ const Campsite = require('../models/campsite');
 const campsiteRouter = express.Router();
 campsiteRouter.use(express.json()); // parses json data into JS properties so we can use it
 
-campsiteRouter.route('/campsites')  // BL NOTE - I put /campsites here instead of / to keep ownership of site name within this file instead of app.js
-  // .all((req, res, next) => {          // chaining all verbs to this router using promises  .all is catch all for all HTTP verbs
-  //   res.statusCode = 200;
-  //   res.setHeader('Content-Type', 'text/plain');
-  //   next();
-  // })
+campsiteRouter.route('/')
   .get((req, res, next) => {
     // res.end('Will send all the campsites to you');
     Campsite.find()
@@ -46,7 +41,7 @@ campsiteRouter.route('/campsites')  // BL NOTE - I put /campsites here instead o
       .catch(err => next(err));
   });
 
-campsiteRouter.route('/campsites/:campsiteId')  // BL NOTE - I put /campsites/:campsiteId here to keep ownership of site name within this file instead of app.js
+campsiteRouter.route('/:campsiteId')
   // .all((req, res, next) => {                      // chaining all verbs to this router using promises  .all is catch all for all HTTP verbs
   //   res.statusCode = 200;
   //   res.setHeader('Content-Type', 'text/plain');
@@ -90,7 +85,7 @@ campsiteRouter.route('/campsites/:campsiteId')  // BL NOTE - I put /campsites/:c
       .catch(err => next(err));
   });
 
-campsiteRouter.route('/campsites/:campsiteId/comments')  // BL NOTE - I put /campsites/:campsiteId/comments here to keep ownership of site name within this file instead of app.js
+campsiteRouter.route('/:campsiteId/comments')
   .get((req, res, next) => {
     Campsite.findById(req.params.campsiteId)
       .then(campsite => {
@@ -153,7 +148,7 @@ campsiteRouter.route('/campsites/:campsiteId/comments')  // BL NOTE - I put /cam
       .catch(err => next(err));
   });
 
-campsiteRouter.route('/campsites/:campsiteId/comments/:commentId')
+campsiteRouter.route('/:campsiteId/comments/:commentId')
   .get((req, res, next) => {
     Campsite.findById(req.params.campsiteId)
       .then(campsite => {
