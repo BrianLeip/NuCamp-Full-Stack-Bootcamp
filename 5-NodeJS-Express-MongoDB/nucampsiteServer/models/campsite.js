@@ -57,4 +57,4 @@ const campsiteSchema = new Schema({
 
 const Campsite = mongoose.model('Campsite', campsiteSchema) // 1st argument should be a capitalized and singular (not plural) version of our object
 
-module.exports = Campsite;
+module.exports = Campsite; 
