@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const passport = require('passport');
-const authenticate = reqiure('./authenticate');
+const authenticate = require('./authenticate');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
