@@ -1,13 +1,10 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-const session = require('express-session');
-const FileStore = require('session-file-store')(session);
 const passport = require('passport');
-const authenticate = require('./authenticate');
+const config = require('./config');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -15,7 +12,7 @@ const campsiteRouter = require('./routes/campsiteRouter');
 const promotionsRouter = require('./routes/promotionsRouter');
 const partnersRouter = require('./routes/partnersRouter');
 
-const url = 'mongodb://localhost:27017/nucampsite';
+const url = config.mongoUrl;
 
 const connect = mongoose.connect(url, {
   useCreateIndex: true,
@@ -41,37 +38,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser('12345-67890-09876-54321'));   // random security code for cookie parser. update: replaced cookieParser with session
 
-app.use(session({
-  name: 'session-id',
-  secret: '12345-67890-09876-54321',
-  saveUninitialized: false,
-  resave: false,
-  store: new FileStore()
-}));
-
-function auth(req, res, next) {
-  console.log("USER DATA:");
-  console.log(req.user);
-
-  if (!req.user) {
-    const err = new Error('You are not authenticated!');
-    err.status = 401;
-    return next(err);
-  } else {
-    return next();
-  }
-}
-
 app.use(passport.initialize());
-app.use(passport.session());
 
 // allow people to go to the main page or user signup before checking user authentication
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-// now check for user authentication and block other urls below if not authenticated
-app.use(auth);
 
 app.use('/campsites', campsiteRouter);
 app.use('/promotions', promotionsRouter);
