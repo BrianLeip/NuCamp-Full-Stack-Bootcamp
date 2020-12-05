@@ -47,36 +47,19 @@ app.use(session({
   store: new FileStore()
 }));
 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
 function auth(req, res, next) {
   console.log("SESSION DATA:");
   console.log(req.session);
 
   if (!req.session.user) {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-      console.log("no authheader");
-      const err = new Error('You are not authenticated!');
-      res.setHeader('WWW-Authenticate', 'Basic'); // request login credentials
-      err.status = 401;
-      return next(err);
-    }
-
-    const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':'); // convert authHeader username:password into an array
-    const user = auth[0];
-    const pass = auth[1];
-    if (user === 'admin' && pass === 'password') {
-      // res.cookie('user', 'admin', {signed: true});  // set up cookie using Express API
-      req.session.user = 'admin'; // replaced cookie with session
-      return next();  // authorized
-    } else {
-      console.log("not admin & pw");
-      const err = new Error('You are not authenticated!');
-      res.setHeader('WWW-Authenticate', 'Basic'); // request login credentials
-      err.status = 401;
-      return next(err);
-    }
+    const err = new Error('You are not authenticated!');
+    err.status = 401;
+    return next(err);
   } else {
-    if (req.session.user === 'admin') {
+    if (req.session.user === 'authenticated') {
       return next();
     } else {
       console.log("not admin");
@@ -91,8 +74,6 @@ app.use(auth);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/campsites', campsiteRouter);
 app.use('/promotions', promotionsRouter);
 app.use('/partners', partnersRouter);
