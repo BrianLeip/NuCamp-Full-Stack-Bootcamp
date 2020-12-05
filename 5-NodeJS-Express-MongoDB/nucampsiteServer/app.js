@@ -6,6 +6,8 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+const passport = require('passport');
+const authenticate = reqiure('./authenticate');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -48,24 +50,20 @@ app.use(session({
 }));
 
 function auth(req, res, next) {
-  console.log("SESSION DATA:");
-  console.log(req.session);
+  console.log("USER DATA:");
+  console.log(req.user);
 
-  if (!req.session.user) {
+  if (!req.user) {
     const err = new Error('You are not authenticated!');
     err.status = 401;
     return next(err);
   } else {
-    if (req.session.user === 'authenticated') {
-      return next();
-    } else {
-      console.log("not admin");
-      const err = new Error('You are not authenticated!');
-      err.status = 401;
-      return next(err);
-    }
+    return next();
   }
 }
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // allow people to go to the main page or user signup before checking user authentication
 app.use(express.static(path.join(__dirname, 'public')));
