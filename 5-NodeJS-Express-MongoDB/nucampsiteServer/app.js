@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -29,16 +31,27 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'pug'); // jade was replaced by pug, but pug doesn't properly work with error.jade file. Revert to jade
 app.set('view engine', 'jade');  // jade is deprecated and has multiple security vulnerabilities, but required to work with errors.  leaving in
-// app.set('view engine', 'pug'); // jade was replaced by pug, but pug doesn't properly work with error.jade file
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser('12345-67890-09876-54321'));   // random security code for cookie parser
+// app.use(cookieParser('12345-67890-09876-54321'));   // random security code for cookie parser. update: replaced cookieParser with session
+
+app.use(session({
+  name: 'session-id',
+  secret: '12345-67890-09876-54321',
+  saveUninitialized: false,
+  resave: false,
+  store: new FileStore()
+}));
 
 function auth(req, res, next) {
-  if (!req.signedCookies.user) {  // req should automatically parse and include the signed cookie if one already exists. Checking for that here
+  console.log("SESSION DATA:");
+  console.log(req.session);
+
+  if (!req.session.user) {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
       console.log("no authheader");
@@ -52,7 +65,8 @@ function auth(req, res, next) {
     const user = auth[0];
     const pass = auth[1];
     if (user === 'admin' && pass === 'password') {
-      res.cookie('user', 'admin', {signed: true});  // set up cookie using Express API
+      // res.cookie('user', 'admin', {signed: true});  // set up cookie using Express API
+      req.session.user = 'admin'; // replaced cookie with session
       return next();  // authorized
     } else {
       console.log("not admin & pw");
@@ -62,7 +76,7 @@ function auth(req, res, next) {
       return next(err);
     }
   } else {
-    if (req.signedCookies.user === 'admin') {
+    if (req.session.user === 'admin') {
       return next();
     } else {
       console.log("not admin");
