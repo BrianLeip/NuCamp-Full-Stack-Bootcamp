@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.pose('/signup', (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   User.findOne({username: req.body.username}) // check if username already exists
   .then(user => {
     if (user) {
@@ -29,6 +29,58 @@ router.pose('/signup', (req, res, next) => {
     }
   })
   .catch(err => next(err));
+});
+
+router.post('/login', (req, res, next) => {
+  if (!req.session.user) {  // check if no session data found for user (user not logged in)
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      console.log("no authheader");
+      const err = new Error('You are not authenticated!');
+      res.setHeader('WWW-Authenticate', 'Basic'); // request login credentials
+      err.status = 401;
+      return next(err);
+    }
+
+    const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':'); // convert authHeader username:password into an array
+    const username = auth[0];
+    const password = auth[1];
+
+    User.findOne({username: username})  // check if user already exists in the database
+    .then(user => {
+      if (!user) {  // if user doesn't exist, throw an error
+        const err = new Error(`User ${username} does not exist!`);
+        err.status = 401;
+        return next(err);
+      } else if (user.password != password) {   // if password doesn't match, throw an error
+        const err = new Error('Your password is incorrect!');
+        err.status = 401;
+        return next(err);
+      } else if (user.username === username && user.password === password) {
+        req.session.user = 'authenticated';
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/plain');
+        res.end('You are authenticated!');
+      }
+    })
+    .catch(err => next(err));
+  } else {  // if there is session data, then user is already logged in
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('You are already authenticated');
+  }
+});
+
+router.get('/logout', (req, res, next) => {
+  if (req.session) {
+    req.session.destroy();
+    res.clearCookie('session-id');
+    res.redirect('/');  // send them back to index
+  } else {
+    const err = new Error('You are not logged in!');
+    err.status = 401;
+    return next(err);
+  }
 });
 
 module.exports = router;
