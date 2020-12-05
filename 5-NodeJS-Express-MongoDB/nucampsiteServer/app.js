@@ -29,8 +29,8 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');  // jade is deprecated and has multiple security vulnerabilities.  replaced with pug.
-app.set('view engine', 'pug');
+app.set('view engine', 'jade');  // jade is deprecated and has multiple security vulnerabilities, but required to work with errors.  leaving in
+// app.set('view engine', 'pug'); // jade was replaced by pug, but pug doesn't properly work with error.jade file
 
 app.use(logger('dev'));
 app.use(express.json());
