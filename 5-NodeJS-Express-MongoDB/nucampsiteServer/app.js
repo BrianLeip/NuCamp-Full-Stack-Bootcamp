@@ -67,12 +67,12 @@ function auth(req, res, next) {
   }
 }
 
-// allow people to go to the main page or user signup before checking authorization
+// allow people to go to the main page or user signup before checking user authentication
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// now check for user authorization
+// now check for user authentication and block other urls below if not authenticated
 app.use(auth);
 
 app.use('/campsites', campsiteRouter);
