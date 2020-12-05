@@ -47,9 +47,6 @@ app.use(session({
   store: new FileStore()
 }));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
 function auth(req, res, next) {
   console.log("SESSION DATA:");
   console.log(req.session);
@@ -70,9 +67,13 @@ function auth(req, res, next) {
   }
 }
 
-app.use(auth);
-
+// allow people to go to the main page or user signup before checking authorization
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+// now check for user authorization
+app.use(auth);
 
 app.use('/campsites', campsiteRouter);
 app.use('/promotions', promotionsRouter);
