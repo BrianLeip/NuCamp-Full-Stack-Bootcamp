@@ -5,9 +5,19 @@ const authenticate = require('../authenticate')
 
 const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+  if (!req.user.admin) {
+    res.statusCode = err.statusCode;
+    res.setHeader('Content-Type', 'application/json');
+    res.json({success: false, status: 'Not allowed. Must be an admin user.'});
+  } else {
+    User.find()
+    .then(users => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(users);
+    })
+  }
 });
 
 router.post('/signup', (req, res) => {
