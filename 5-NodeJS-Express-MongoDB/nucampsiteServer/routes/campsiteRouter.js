@@ -172,7 +172,7 @@ campsiteRouter.route('/:campsiteId/comments/:commentId')
   .put(authenticate.verifyUser, (req, res, next) => {
     Campsite.findById(req.params.campsiteId)
       .then(campsite => {
-        if (campsite && campsite.comments.id(req.params.commentId)) {
+        if (campsite && campsite.comments.id(req.params.commentId) && campsite.comments.author === req.user._id ) { // make sure user matches
           if (req.body.rating) {
             campsite.comments.id(req.params.commentId).rating = req.body.rating;
           }
@@ -190,6 +190,10 @@ campsiteRouter.route('/:campsiteId/comments/:commentId')
           err = new Error(`Campsite ${req.params.campsiteId} not found`);
           err.status = 404;
           return next(err);
+        } else if (campsite.comments.author != req.user._id) {
+          err = new Error(`Can't modify someone else's comment`);
+          err.status = 401;
+          return next(err);
         } else {
           err = new Error(`Comment ${req.params.commentId} not found`);
           err.status = 404;
@@ -201,7 +205,7 @@ campsiteRouter.route('/:campsiteId/comments/:commentId')
   .delete(authenticate.verifyUser, (req, res, next) => {
     Campsite.findById(req.params.campsiteId)
       .then(campsite => {
-        if (campsite && campsite.comments.id(req.params.commentId)) {
+        if (campsite && campsite.comments.id(req.params.commentId) && campsite.comments.author === req.user._id ) { // make sure user matches
           campsite.comments.id(req.params.commentId).remove();
           campsite.save()
             .then(campsite => {
@@ -213,6 +217,10 @@ campsiteRouter.route('/:campsiteId/comments/:commentId')
         } else if (!campsite) {
           err = new Error(`Campsite ${req.params.campsiteId} not found`);
           err.status = 404;
+          return next(err);
+        } else if (campsite.comments.author != req.user._id) {
+          err = new Error(`Can't delete someone else's comment`);
+          err.status = 401;
           return next(err);
         } else {
           err = new Error(`Comment ${req.params.commentId} not found`);
