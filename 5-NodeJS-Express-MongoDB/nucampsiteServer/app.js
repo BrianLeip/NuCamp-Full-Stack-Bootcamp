@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 const campsiteRouter = require('./routes/campsiteRouter');
 const promotionsRouter = require('./routes/promotionsRouter');
 const partnersRouter = require('./routes/partnersRouter');
+const uploadRouter = require('./routes/uploadRouter');
 
 const url = config.mongoUrl;
 
@@ -57,6 +58,7 @@ app.use('/users', usersRouter);
 app.use('/campsites', campsiteRouter);
 app.use('/promotions', promotionsRouter);
 app.use('/partners', partnersRouter);
+app.use('/imageUpload', uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
