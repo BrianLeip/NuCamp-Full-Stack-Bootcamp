@@ -6,16 +6,17 @@
 ## LAUNCH MONGODB SERVER
 1. open a new terminal / console window
 2. cd to the mongodb folder:
-'/Users/Brian/Dropbox/Programming/Courses/Web Dev/NuCamp-Full-Stack-Web-Bootcamp/5-NodeJS-Express-MongoDB/mongodb'
+/Users/Brian/Dropbox/Programming/Courses/Web Dev/NuCamp-Full-Stack-Web-Bootcamp/5-NodeJS-Express-MongoDB/mongodb
 3. run the following command
-`mongod --dbpath=data`
+mongod --dbpath=data
 4. It will launch on the default port 27017
 
 ## LAUNCH THE NODE SERVER
 1. open a new terminal / console window
 2. cd to the nucampsiteServer folder (or whatever server you want to connect to the database)
-'/Users/Brian/Dropbox/Programming/Courses/Web Dev/NuCamp-Full-Stack-Web-Bootcamp/5-NodeJS-Express-MongoDB/nucampsiteServer'
+/Users/Brian/Dropbox/Programming/Courses/Web Dev/NuCamp-Full-Stack-Web-Bootcamp/5-NodeJS-Express-MongoDB/nucampsiteServer
 3. the site will launch to `localhost:3000`.  Use that url to access it from any web browser or to test requests with Postman
+Note - later in the course when the secure site is created, it will launch to `https://localhost:3443` instead
 
 ## TO TEST WITHIN POSTMAN:
 1. Either a) Launch the postman agent and go to postman.com, or b) launch the desktop app
