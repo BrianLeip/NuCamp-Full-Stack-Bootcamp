@@ -8,39 +8,75 @@ const favoriteRouter = express.Router();
 favoriteRouter.route('/')
 .options(cors.corsWithOptions, (req, res) => res.sendStatus(200) )
 .get(cors.cors, authenticate.verifyUser, (req, res, next) => {
-  res.statusCode(200);
-  res.end('Will send favorites')
+  Favorite.find( {user: req.user._id} )
+  .populate('favorite.user')  // will populate the user field of all favorites with the user's name
+  .populate('favorite.campsites')  // will populate the campsites array with each users's favorite campsites
+  .then( (favorite) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(favorite);
+  })
 })
 .post(cors.cors, authenticate.verifyUser, (req, res, next) => {
-  res.statusCode(200);
-  res.end('Will post favorites')
+  Favorite.find( {user: req.user._id} )
+  .populate('favorite.user')  // will populate the user field of all favorites with the user's name
+  .populate('favorite.campsites')  // will populate the campsites array with each users's favorite campsites
+  .then( (favorite) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.end('Will post favorites')
+  })
 })
 .put(cors.cors, authenticate.verifyUser, (req, res, next) => {
-  res.statusCode(200);
-  res.end('Will put favorites')
+  Favorite.find( {user: req.user._id} )
+  .populate('favorite.user')  // will populate the user field of all favorites with the user's name
+  .populate('favorite.campsites')  // will populate the campsites array with each users's favorite campsites
+  .then( (favorite) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.end('Will put favorites')
+  })
 })
 .delete(cors.cors, authenticate.verifyUser, (req, res, next) => {
-  res.statusCode(200);
-  res.end('Will delete favorites')
+  Favorite.find( {user: req.user._id} )
+  .populate('favorite.user')  // will populate the user field of all favorites with the user's name
+  .populate('favorite.campsites')  // will populate the campsites array with each users's favorite campsites
+  .then( (favorite) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.end('Will delete favorites')
+  })
 })
 
 favoriteRouter.route('/:campsiteId')
 .options(cors.corsWithOptions, (req, res) => res.sendStatus(200) )
 .get(cors.cors, authenticate.verifyUser, (req, res, next) => {
-  res.statusCode(200);
-  res.end('Will send campsite favorites')
+  Favorite.find()
+  .then( () => {
+    res.statusCode = 200;
+    res.end('Will send campsite favorites')
+  })
 })
 .post(cors.cors, authenticate.verifyUser, (req, res, next) => {
-  res.statusCode(200);
-  res.end('Will post campsite favorites')
+  Favorite.find()
+  .then( () => {
+    res.statusCode = 200;
+    res.end('Will post campsite favorites')
+  })
 })
 .put(cors.cors, authenticate.verifyUser, (req, res, next) => {
-  res.statusCode(200);
-  res.end('Will put campsite favorites')
+  Favorite.find()
+  .then( () => {
+    res.statusCode = 200;
+    res.end('Will put campsite favorites')
+  })
 })
 .delete(cors.cors, authenticate.verifyUser, (req, res, next) => {
-  res.statusCode(200);
-  res.end('Will delete campsite favorites')
+  Favorite.find()
+  .then( () => {
+    res.statusCode = 200;
+    res.end('Will delete campsite favorites')
+  })
 })
 
 module.exports = favoriteRouter;

@@ -6,16 +6,16 @@ const Schema = mongoose.Schema;
 const favoriteSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: User,
-    required: true
+    ref: 'User'
   },
   campsites: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Campsite,
-    required: true
+    ref: 'Campsite'
   }
+}, {
+  timestamps: true
 });
 
 const Favorite = mongoose.model('Favorite', favoriteSchema);
 
-mongoose.models.export = Favorite;
+module.exports = Favorite;
