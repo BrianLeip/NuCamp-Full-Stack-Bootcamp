@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const GoogleStrategy = require('passport-google-oauth');  // Googla oauth  http://www.passportjs.org/packages/passport-google-oauth/ 
 const BearerTokenStrategy = require('passport-http-bearer');  // Bearer tokens auth http://www.passportjs.org/packages/passport-http-bearer/ 
 const OpenIDStrategy = require('openid-client');  // OpenID server side client auth http://www.passportjs.org/packages/openid-client/ 
+const { Issuer } = require('openid-client');
 
 const config = require('./config.js');
 const { NotExtended } = require('http-errors');
@@ -42,6 +43,10 @@ exports.jwtPassport = passport.use(
 );
 
 exports.verifyUser = passport.authenticate('jwt', {session: false});  // shortcut to use in other files for user authentication with jwt strategy
+// exports.verifyUser = Issuer.discover('https://accounts.google.com') // => Promise
+//   .then(function (googleIssuer) {
+//   console.log('Discovered issuer %s %O', googleIssuer.issuer, googleIssuer.metadata);
+// });
 
 exports.verifyAdmin = (req, res, next) => {
   if(!req.user) {
