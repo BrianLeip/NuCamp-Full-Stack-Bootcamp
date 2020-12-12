@@ -4,6 +4,7 @@ var path = require('path');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const googleStrategy = require('passport-google-oauth20');
 const config = require('./config');
 
 var indexRouter = require('./routes/index');

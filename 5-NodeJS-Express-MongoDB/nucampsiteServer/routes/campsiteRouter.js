@@ -8,7 +8,7 @@ const campsiteRouter = express.Router();
 campsiteRouter.route('/')
   .options(cors.corsWithOptions, (req, res) => res.sendStatus(200) )
   .get(cors.cors, (req, res, next) => {
-    Campsite.find()
+    Campsite.find()   // returns array of all campsites
       .populate('comments.author')  // will populate the author field of any comments with the user's name
       .then(campsites => {
         res.statusCode = 200;
