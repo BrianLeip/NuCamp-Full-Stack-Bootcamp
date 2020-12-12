@@ -1,9 +1,12 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
-const JwtStrategy = require('passport-jwt').Strategy;
+const JwtStrategy = require('passport-jwt').Strategy;   // JSON web tokens http://www.passportjs.org/packages/passport-jwt/ 
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const jwt = require('jsonwebtoken');
+const GoogleStrategy = require('passport-google-oauth');  // Googla oauth  http://www.passportjs.org/packages/passport-google-oauth/ 
+const BearerTokenStrategy = require('passport-http-bearer');  // Bearer tokens auth http://www.passportjs.org/packages/passport-http-bearer/ 
+const OpenIDStrategy = require('openid-client');  // OpenID server side client auth http://www.passportjs.org/packages/openid-client/ 
 
 const config = require('./config.js');
 const { NotExtended } = require('http-errors');
