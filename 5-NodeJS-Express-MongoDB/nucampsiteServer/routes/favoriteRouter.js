@@ -18,13 +18,36 @@ favoriteRouter.route('/')
   })
 })
 .post(cors.cors, authenticate.verifyUser, (req, res, next) => {
-  Favorite.find( {user: req.user._id} )
-  .populate('favorite.user')  // will populate the user field of all favorites with the user's name
-  .populate('favorite.campsites')  // will populate the campsites array with each users's favorite campsites
+  Favorite.findOne( {user: req.user._id} )
   .then( (favorite) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.end('Will post favorites')
+    if (favorite) {
+      req.body.forEach( (campsite) => {
+        if (!favorite.campsites.includes(campsite._id)) {
+          favorite.campsites.push(campsite._id);
+        }
+      })
+      favorite.save()
+      .then( (favorite) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(favorite);
+      })
+    } else {
+      Favorite.create( {user: req.user._id} )
+      .then( (favorite) => {
+        req.body.forEach( (campsite) => {
+          favorite.campsites.push(campsite._id);
+        })
+        favorite.save()
+        .then( (favorite) => {
+          console.log('Favorite Created: ', favorite);
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.json(favorite);
+        })
+      })
+      .catch(err => next(err));
+    }
   })
 })
 .put(cors.cors, authenticate.verifyUser, (req, res, next) => {
